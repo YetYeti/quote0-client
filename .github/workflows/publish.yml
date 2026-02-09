@@ -24,17 +24,20 @@ jobs:
       - name: Set up Python
         run: uv python install 3.12
 
+      - name: Create virtual environment
+        run: uv venv
+
       - name: Install twine
-        run: uv pip install --system twine
+        run: uv pip install twine
 
       - name: Build package
         run: uv build
 
       - name: Check distribution
-        run: twine check dist/*
+        run: .venv/bin/twine check dist/*
 
       - name: Publish to PyPI
-        run: twine upload dist/*
+        run: .venv/bin/twine upload dist/*
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
