@@ -1,7 +1,7 @@
 # Quote0 Client Python SDK
 
 ![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)
-![Version](https://img.shields.io/badge/version-0.1.1-green.svg)
+![Version](https://img.shields.io/badge/version-0.1.0-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-orange.svg)
 ![CI](https://github.com/YetYeti/quote0-client/workflows/CI/badge.svg)
 ![PyPI version](https://badge.fury.io/py/quote0-client.svg)
