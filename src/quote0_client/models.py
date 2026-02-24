@@ -106,18 +106,25 @@ class Task(BaseModel):
     """Task information for the device.
 
     Attributes:
-        type: Task type (TEXT_API or IMAGE_API)
-        key: Unique task key
+        type: Task type (TEXT_API, IMAGE_API, or GENERAL)
+        key: Content identifier, can be null (used as taskKey for Text/Image API)
         refreshNow: Whether to refresh immediately
         title: Text title (for TEXT_API tasks)
         message: Text message (for TEXT_API tasks)
-        border: Border style (for IMAGE_API tasks)
-        ditherType: Dither type (for IMAGE_API tasks)
+        signature: Text signature (for TEXT_API tasks)
+        icon: Base64-encoded PNG icon data (for TEXT_API tasks)
+        link: NFC redirect link
+        image: Base64-encoded PNG image data (for IMAGE_API tasks)
+        border: Border style (0=white, 1=black, for IMAGE_API tasks)
+        ditherType: Dither type (DIFFUSION, ORDERED, or NONE, for IMAGE_API tasks)
         ditherKernel: Dither kernel (for IMAGE_API tasks)
     """
 
-    type: str = Field(description="Task type (TEXT_API or IMAGE_API)")
-    key: str = Field(description="Unique task key")
+    type: str = Field(description="Task type (TEXT_API, IMAGE_API, or GENERAL)")
+    key: Optional[str] = Field(
+        default=None,
+        description="Content identifier, can be null (used as taskKey for Text/Image API)",
+    )
     refreshNow: bool = Field(default=True, description="Whether to refresh immediately")
     title: Optional[str] = Field(
         default=None, description="Text title (for TEXT_API tasks)"
@@ -125,8 +132,18 @@ class Task(BaseModel):
     message: Optional[str] = Field(
         default=None, description="Text message (for TEXT_API tasks)"
     )
+    signature: Optional[str] = Field(
+        default=None, description="Text signature (for TEXT_API tasks)"
+    )
+    icon: Optional[str] = Field(
+        default=None, description="Base64-encoded PNG icon data (for TEXT_API tasks)"
+    )
+    link: Optional[str] = Field(default=None, description="NFC redirect link")
+    image: Optional[str] = Field(
+        default=None, description="Base64-encoded PNG image data (for IMAGE_API tasks)"
+    )
     border: Optional[int] = Field(
-        default=None, description="Border style (0 or 1, for IMAGE_API tasks)"
+        default=None, description="Border style (0=white, 1=black, for IMAGE_API tasks)"
     )
     ditherType: Optional[str] = Field(
         default="DIFFUSION",

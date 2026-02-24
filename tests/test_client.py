@@ -326,6 +326,64 @@ class TestListTasks:
             assert tasks[1].type == "IMAGE_API"
             assert tasks[1].ditherType == "DIFFUSION"
 
+    def test_list_tasks_with_all_fields(self, test_client, mock_response):
+        """Test parsing tasks with all optional fields including new ones."""
+        tasks_data = [
+            {
+                "type": "TEXT_API",
+                "key": "text-full",
+                "title": "Test Title",
+                "message": "Test Message",
+                "signature": "Test Signature",
+                "icon": "iVBORw0KGgo=",
+                "link": "https://example.com",
+                "refreshNow": True,
+            },
+            {
+                "type": "IMAGE_API",
+                "key": "image-full",
+                "image": "iVBORw0KGgo=",
+                "border": 1,
+                "ditherType": "ORDERED",
+                "ditherKernel": "ATKINSON",
+                "refreshNow": False,
+            },
+            {
+                "type": "GENERAL",
+                "key": None,
+            },
+        ]
+
+        mock_response.json.return_value = tasks_data
+
+        with patch.object(test_client._client, "request", return_value=mock_response):
+            tasks = test_client.list_tasks("ABC123")
+
+            assert len(tasks) == 3
+
+            # TEXT_API task with all fields
+            assert tasks[0].type == "TEXT_API"
+            assert tasks[0].key == "text-full"
+            assert tasks[0].title == "Test Title"
+            assert tasks[0].message == "Test Message"
+            assert tasks[0].signature == "Test Signature"
+            assert tasks[0].icon == "iVBORw0KGgo="
+            assert tasks[0].link == "https://example.com"
+            assert tasks[0].refreshNow is True
+
+            # IMAGE_API task with all fields
+            assert tasks[1].type == "IMAGE_API"
+            assert tasks[1].key == "image-full"
+            assert tasks[1].image == "iVBORw0KGgo="
+            assert tasks[1].border == 1
+            assert tasks[1].ditherType == "ORDERED"
+            assert tasks[1].ditherKernel == "ATKINSON"
+            assert tasks[1].refreshNow is False
+
+            # GENERAL task with null key
+            assert tasks[2].type == "GENERAL"
+            assert tasks[2].key is None
+
     def test_list_tasks_default_task_type(self, test_client, mock_response):
         """Test list_tasks with default task_type."""
         tasks_data = [
