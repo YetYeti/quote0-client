@@ -224,9 +224,7 @@ class APIResponse(BaseModel):
         >>> APIResponse(code=200, message="Success", result={"message": "Done"})
     """
 
-    code: str | int = Field(
-        description="Response code (200 for success)"
-    )
+    code: str | int = Field(description="Response code (200 for success)")
     message: str = Field(description="Response message")
     result: Optional[Dict[str, Any]] = Field(
         default=None, description="Response result data"
