@@ -1,6 +1,6 @@
 [project]
 name = "quote0-client"
-version = "0.1.2"
+version = "0.1.3"
 description = "Python SDK for Quote0 e-ink device API"
 readme = "README.md"
 authors = [
