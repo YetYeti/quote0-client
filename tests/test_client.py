@@ -250,7 +250,7 @@ class TestSwitchToNext:
 
     def test_switch_to_next_success(self, test_client, mock_response):
         """Test successfully switching to next content."""
-        response_data = {"code": 0, "message": "Switched successfully", "result": {}}
+        response_data = {"code": 200, "message": "Switched successfully", "result": {}}
 
         mock_response.json.return_value = response_data
 
@@ -258,7 +258,7 @@ class TestSwitchToNext:
             response = test_client.switch_to_next("ABC123")
 
             assert isinstance(response, APIResponse)
-            assert response.code == 0
+            assert response.code == 200
             assert response.success is True
             assert response.message == "Switched successfully"
 
@@ -432,7 +432,7 @@ class TestSendText:
         """Test successfully sending text content."""
         text_req = TextContentRequest(title="Hello", message="World!", refreshNow=True)
 
-        response_data = {"code": 0, "message": "Text sent", "result": {}}
+        response_data = {"code": 200, "message": "Text sent", "result": {}}
 
         mock_response.json.return_value = response_data
 
@@ -440,7 +440,7 @@ class TestSendText:
             response = test_client.send_text("ABC123", text_req)
 
             assert isinstance(response, APIResponse)
-            assert response.code == 0
+            assert response.code == 200
             assert response.success is True
 
     def test_send_text_without_optional_fields(self, test_client, mock_response):
@@ -449,7 +449,7 @@ class TestSendText:
             title="Title", message="Message", refreshNow=False
         )
 
-        response_data = {"code": 0, "message": "Success", "result": {}}
+        response_data = {"code": 200, "message": "Success", "result": {}}
 
         mock_response.json.return_value = response_data
 
@@ -467,7 +467,7 @@ class TestSendText:
             refreshNow=True,
         )
 
-        response_data = {"code": 0, "message": "Success", "result": {}}
+        response_data = {"code": 200, "message": "Success", "result": {}}
 
         mock_response.json.return_value = response_data
 
@@ -511,7 +511,7 @@ class TestSendImage:
             image="iVBORw0KGgoAAAANSUhEUgAA...", border=0, refreshNow=True
         )
 
-        response_data = {"code": 0, "message": "Image sent", "result": {}}
+        response_data = {"code": 200, "message": "Image sent", "result": {}}
 
         mock_response.json.return_value = response_data
 
@@ -519,7 +519,7 @@ class TestSendImage:
             response = test_client.send_image("ABC123", image_req)
 
             assert isinstance(response, APIResponse)
-            assert response.code == 0
+            assert response.code == 200
             assert response.success is True
 
     def test_send_image_with_all_options(self, test_client, mock_response):
@@ -532,7 +532,7 @@ class TestSendImage:
             refreshNow=False,
         )
 
-        response_data = {"code": 0, "message": "Success", "result": {}}
+        response_data = {"code": 200, "message": "Success", "result": {}}
 
         mock_response.json.return_value = response_data
 
@@ -748,7 +748,7 @@ class TestModelSerialization:
 
     def test_api_response_success_property(self, test_client, mock_response):
         """Test APIResponse success property."""
-        response_data = {"code": 0, "message": "Success", "result": {}}
+        response_data = {"code": 200, "message": "Success", "result": {}}
 
         mock_response.json.return_value = response_data
 
@@ -756,7 +756,7 @@ class TestModelSerialization:
             response = test_client.switch_to_next("ABC123")
 
             assert response.success is True
-            assert response.code == 0
+            assert response.code == 200
 
     def test_api_response_failure_property(self, test_client, mock_response):
         """Test APIResponse success property when code is non-zero."""

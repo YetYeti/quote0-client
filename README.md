@@ -67,7 +67,7 @@ if response.success:
 - `DeviceStatus`: 设备状态（电池、WiFi、渲染信息等）
 - `TextContentRequest`: 文本内容（title, message, signature）
 - `ImageContentRequest`: 图像内容（base64编码图片, border, ditherType）
-- `APIResponse`: 通用响应包装器（success, message, data）
+- `APIResponse`: 通用响应包装器（code, message, result）
 
 ## 错误处理
 
@@ -172,4 +172,3 @@ MIT License
 
 - [Quote0 官方文档](https://dot.mindreset.tech/docs/service/open)
 - [Dot. App](https://dot.mindreset.tech/app)
-

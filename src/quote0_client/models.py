@@ -216,16 +216,16 @@ class APIResponse(BaseModel):
     """Generic API response wrapper.
 
     Attributes:
-        code: Response code (0 for success, non-zero for errors) - can be string or int
+        code: Response code (200 for success) - can be string or int
         message: Response message
         result: Response result data (optional)
 
     Example:
-        >>> APIResponse(code=0, message="Success", result={"message": "Done"})
+        >>> APIResponse(code=200, message="Success", result={"message": "Done"})
     """
 
     code: str | int = Field(
-        description="Response code (0 for success, non-zero for errors)"
+        description="Response code (200 for success)"
     )
     message: str = Field(description="Response message")
     result: Optional[Dict[str, Any]] = Field(
@@ -237,6 +237,6 @@ class APIResponse(BaseModel):
         """Check if the response was successful.
 
         Returns:
-            True if code is 0, False otherwise.
+            True if code is 200, False otherwise.
         """
-        return self.code == 0
+        return str(self.code) == "200"
