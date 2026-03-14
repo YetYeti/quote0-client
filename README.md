@@ -10,11 +10,11 @@
 
 ## 功能特性
 
-- 完整覆盖 Quote0 的全部 6 个 API 端点
+- 完整覆盖 Quote0 Open API 文档中的 6 个端点
 - 基于 Pydantic v2 模型的类型安全
 - 全面的错误处理
 - 支持文本和图像内容
-- 设备任务管理
+- 设备内容管理
 - 易于使用的同步客户端
 
 ## 安装
@@ -57,7 +57,7 @@ if response.success:
 | `get_devices()` | 获取所有设备列表 | 无 | `List[Device]` |
 | `get_device_status(device_id)` | 获取设备状态 | `device_id`: 设备序列号 | `DeviceStatus` |
 | `switch_to_next(device_id)` | 切换到下一个内容 | `device_id`: 设备序列号 | `APIResponse` |
-| `list_tasks(device_id, task_type)` | 列出设备任务 | `device_id`: 设备序列号, `task_type`: 任务类型 | `List[Task]` |
+| `list_tasks(device_id, task_type)` | 列出设备内容 | `device_id`: 设备序列号, `task_type`: 内容类型 | `List[Task]` |
 | `send_text(device_id, content)` | 发送文本内容 | `device_id`: 设备序列号, `content`: TextContentRequest | `APIResponse` |
 | `send_image(device_id, content)` | 发送图像内容 | `device_id`: 设备序列号, `content`: ImageContentRequest | `APIResponse` |
 
